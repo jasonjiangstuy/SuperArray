@@ -7,6 +7,8 @@ public class Tester {
         for(int i = 0; i < words.size(); i++){
         System.out.println( words.get(i) );
         }    
+        System.out.println( words.isEmpty() );
+        System.out.println( words.toString() );
         System.out.println("end");
 
         // test resizing
