@@ -7,6 +7,13 @@ public class SuperArray {
         size = 0;
         
     }
+    public SuperArray(int InitialCapacity){
+        data = new String[InitialCapacity];
+        size = 0;
+        
+    }
+
+
 
     public int size(){
         return size;
@@ -15,8 +22,6 @@ public class SuperArray {
     public boolean add(String element){
         if (size >= data.length){
             resize();
-            data[size] = element;
-            size ++;
         }
         data[size] = element;
         size ++;
@@ -75,6 +80,64 @@ public class SuperArray {
         for (int i = 0; i < size; i++){
             data[i] = null;
         }
+        size = 0;
+    }
+    // test with small arrays, afraid of the - 1
+    public void add(int index, String element){
+        if (0 <= index || index < size){
+            if ((size + 1) > data.length){
+                resize();
+            }
+
+            for (int i = size; i > 0; i--){
+                data[i] = data[i - 1];
+                if (i - 1 == index){
+                    data[i - 1] = element;
+                    size += 1;
+                    break;
+                }
+            }
+
+            // exception if the index == 0 and size == 0
+            // or if index == size - 1 => append or add 
+            if ((index == 0 && size == 0) || index == size - 1){
+                add(element);
+            }
+        }
+    }
+
+    public void remove(int index){
+        if (0 <= index || index < size){
+            String prevEle = null;
+            String temp;
+            for (int i = size - 1; i >= 0; i--){
+                temp = data[i];
+                data[i] = prevEle;
+                prevEle = temp;
+                if (i == index){
+                    size -= 1;
+                    break;
+                }
+            }
+        }
+    }   
+
+    // Returns the index of the first occurrence of the specified element in this list, or -1 if this list does not contain the element. 
+    public int indexOf(String s){
+        for (int i= 0; i < size; i++){
+            if (data[i] != null && s.equals(data[i])){
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    public String[] toArray(){
+        String[] newArray = new String[data.length];
+        for (int i= 0; i < size; i++){
+            newArray[i] = data[i];
+        }
+        return newArray;
     }
 
 
