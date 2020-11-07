@@ -67,15 +67,9 @@ public class SuperArray {
     }
 
     public boolean contains(String s){
-        for (int i = 0; i < size; i++){
-            if (data[i] != null && s.equals(data[i])){
-                return true;
-            }
-            
-        }
-        return false;
-    }
 
+        return (-1 != indexOf(s));
+    }
     public void clear(){
         for (int i = 0; i < size; i++){
             data[i] = null;
@@ -106,7 +100,7 @@ public class SuperArray {
         }
     }
 
-    public void remove(int index){
+    public String remove(int index){
         if (0 <= index || index < size){
             String prevEle = null;
             String temp;
@@ -116,30 +110,49 @@ public class SuperArray {
                 prevEle = temp;
                 if (i == index){
                     size -= 1;
-                    break;
+                    return prevEle;
                 }
             }
         }
+        return "Fail";
     }   
 
     // Returns the index of the first occurrence of the specified element in this list, or -1 if this list does not contain the element. 
     public int indexOf(String s){
         for (int i= 0; i < size; i++){
-            if (data[i] != null && s.equals(data[i])){
+            if (data[i].equals(s)){
                 return i;
             }
         }
         return -1;
     }
 
+    // Including nulls
     public String[] toArray(){
-        String[] newArray = new String[data.length];
+        String[] newArray = new String[size];
+        // System.out.println("Size: "+this.size);
         for (int i= 0; i < size; i++){
             newArray[i] = data[i];
         }
         return newArray;
     }
 
+    public int lastIndexOf(String value){
+        for (int i= size; i >= 0; i --){
+            if (data[i].equals(value)){
+                return i;
+            }
+        }
+        return -1;
+    }
+    public boolean equals(SuperArray other){
+        for (int i = 0; i< size; i++)    {
+            if (!(data[i].equals(other.get(i)))){
+                return false;
+            }
+        }
+        return true;
+    }
 
-
+    
 }
