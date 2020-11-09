@@ -8,6 +8,9 @@ public class SuperArray {
         
     }
     public SuperArray(int InitialCapacity){
+        if (InitialCapacity < 0){
+            throw new IllegalArgumentException("you cannot have a negitive capacity");
+        }
         data = new String[InitialCapacity];
         size = 0;
         
@@ -30,10 +33,16 @@ public class SuperArray {
     }
 
     public String get(int index){
+        if (index < 0 || index >= size()){
+            throw new IndexOutOfBoundsException("Your index was out of bounds");
+        }
         return data[index];
     }
 
     public String set(int index, String element){
+        if (index < 0 || index >= size()){
+            throw new IndexOutOfBoundsException("Your index was out of bounds");
+        }
         String hold = data[index];
         data[index] = element;
         return hold;
@@ -78,7 +87,11 @@ public class SuperArray {
     }
     // test with small arrays, afraid of the - 1
     public void add(int index, String element){
-        if (0 <= index || index < size){
+        if (index < 0 || index > size()){
+            throw new IndexOutOfBoundsException("Your index was out of bounds");
+        }
+
+
             if ((size + 1) > data.length){
                 resize();
             }
@@ -97,11 +110,14 @@ public class SuperArray {
             if ((index == 0 && size == 0) || index == size - 1){
                 add(element);
             }
-        }
+
     }
 
     public String remove(int index){
-        if (0 <= index || index < size){
+        if (index < 0 || index >= size()){
+            throw new IndexOutOfBoundsException("Your index was out of bounds");
+        }
+
             String prevEle = null;
             String temp;
             for (int i = size - 1; i >= 0; i--){
@@ -113,9 +129,10 @@ public class SuperArray {
                     return prevEle;
                 }
             }
-        }
+        
         return "Fail";
-    }   
+    }
+     
 
     // Returns the index of the first occurrence of the specified element in this list, or -1 if this list does not contain the element. 
     public int indexOf(String s){
