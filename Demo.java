@@ -29,7 +29,7 @@ public class Demo{
                 // System.out.println("Found:" + target.equals(b.get(x)));
                 if (target.equals(b.get(x))){
                     result.add(target);
-                    b.remove(x);
+                    // b.remove(x);
                     break;
                 }
                 // System.out.println(x+1< b.size());

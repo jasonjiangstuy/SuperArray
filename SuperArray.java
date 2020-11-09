@@ -138,21 +138,33 @@ public class SuperArray {
     }
 
     public int lastIndexOf(String value){
-        for (int i = size -1; i >= 0; i --){
-            // System.out.println(data[i]);
+        if (contains(value)){
+            for (int i = size -1; i >= 0; i --){
+                // System.out.println(data[i]);
             
-            if (data[i].equals(value)){
-                return i;
+                if (data[i].equals(value)){
+                    return i;
+                }
             }
-        }
+        }  
         return -1;
     }
     public boolean equals(SuperArray other){
+        // System.out.println(size);
+        // System.out.println(other.size);
+        if (size != other.size){
+            return false;
+        }
         for (int i = 0; i< size; i++)    {
+            // System.out.println("#1: " + data[i]);
+            // System.out.println("#2: " + other.get(i));
+            // System.out.println(!(data[i].equals(other.get(i))));
             if (!(data[i].equals(other.get(i)))){
                 return false;
             }
         }
+    
+        
         return true;
     }
 
