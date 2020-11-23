@@ -87,11 +87,12 @@ public class SuperArray {
     }
     // test with small arrays, afraid of the - 1
     public void add(int index, String element){
+        // System.out.println("Test");
         if (index < 0 || index > size()){
             throw new IndexOutOfBoundsException("Your index was out of bounds");
         }
 
-
+        else if(index < size()){
             if ((size + 1) > data.length){
                 resize();
             }
@@ -104,13 +105,14 @@ public class SuperArray {
                     break;
                 }
             }
+        }
+        else{
 
-            // exception if the index == 0 and size == 0
-            // or if index == size - 1 => append or add 
-            if ((index == 0 && size == 0) || index == size - 1){
-                add(element);
-            }
-
+            // if index == size => append or add 
+            
+            add(element);
+            
+        }
     }
 
     public String remove(int index){
